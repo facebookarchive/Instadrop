@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Instadrop - automatically sync your Instagram photos to Dropbox</title>
+</head>
+<body style="font-family:'Helvetica Neue'">
+    <a href="http://github.com/Instagram/Instadrop"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://assets1.github.com/img/e6bef7a091f5f3138b8cd40bc3e114258dd68ddf?repo=&url=http%3A%2F%2Fs3.amazonaws.com%2Fgithub%2Fribbons%2Fforkme_right_red_aa0000.png&path=" alt="Fork me on GitHub"></a>
+    <div style="margin:50px auto;width:550px;position:relative">
+        <h1>
+        {% if profile %}
+            Almost...
+        {% else %}
+            Hello there.
+        {% endif %}
+        </h1>
+        <h1>
+            Instadrop connects your Instagram account to your Dropbox. Once
+            connected Instadrop will automatically push the photos you take
+            on Instagram into your Dropbox– in real-time!
+            <br /> <br />
+        </h1>
+        {% if profile and profile.instagram_connected and not profile.dropbox_connected %}
+            <h3>
+                Great, you're almost there! We have your Instagram account
+                connected.
+                 <br /> <br />
+                One last step: <a href="/dropbox/auth">connect your Dropbox account</a>.
+            </h3>
+            <div style="position:absolute;right:0">
+                <h4><a href="/instagram/disconnect">Disconnect Instagram</a></h4>
+            </div>
+        {% else %}
+            <h1>
+                Sound good? Let's get started. <br />
+                <a href="/instagram/auth">Connect your Instagram account</a>
+            </h1>
+        {% endif %}
+    </div>
+</body>

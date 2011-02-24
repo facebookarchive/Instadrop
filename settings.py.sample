@@ -1,0 +1,20 @@
+from dropbox import helper as dropbox_helper
+
+COOKIE_SECRET = "958070f945fd4XxxSOMETHING_RANDOMxXX570f945fd4"
+
+INSTAGRAM_REDIRECT_URI = "http://example.appspot.com/instagram/callback"
+INSTAGRAM_PUSH_CALLBACK = "http://example.appspot.com/instagram/push_callback"
+INSTAGRAM_CONFIG = {
+        "client_id": "CLIENT_ID",
+        "client_secret": "CLIENT_SECRET",
+        "redirect_uri": INSTAGRAM_REDIRECT_URI
+}
+
+DROPBOX_CALLBACK = "http://example.appspot.com/dropbox/callback"
+DROPBOX_CONFIG = dropbox_helper.load_config("prod_dropbox.ini")
+
+
+try:
+    from local_settings import *
+except ImportError:
+    pass

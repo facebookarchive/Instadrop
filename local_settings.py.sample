@@ -1,0 +1,12 @@
+from dropbox import helper as dropbox_helper
+
+INSTAGRAM_REDIRECT_URI = "http://localhost:8080/instagram/callback"
+INSTAGRAM_PUSH_CALLBACK = "http://example.localtunnel.com/instagram/push_callback"
+INSTAGRAM_CONFIG = {
+        "client_id": "CLIENT_ID",
+        "client_secret": "CLIENT_SECRET",
+        "redirect_uri": INSTAGRAM_REDIRECT_URI
+}
+
+DROPBOX_CALLBACK = "http://localhost:8080/dropbox/callback"
+DROPBOX_CONFIG = dropbox_helper.load_config("local_dropbox.ini")

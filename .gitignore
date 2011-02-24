@@ -1,0 +1,5 @@
+*.pyc
+.DS_Store
+settings.py
+local_settings.py
+*_dropbox.ini
