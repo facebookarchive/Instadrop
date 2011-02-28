@@ -58,6 +58,39 @@ class InstagramCallback(webapp.RequestHandler):
 
         self.redirect("/connect")
 
+class InstagramLoadUser(webapp.RequestHandler):
+    def get(self):
+        ig_user_id = self.request.get("ig_user_id")
+
+        if not ig_user_id:
+            self.redirect("/connect")
+
+        instagram_client = InstagramAPI(**settings.INSTAGRAM_CONFIG)
+
+        access_token = instagram_client.exchange_user_id_for_access_token(ig_user_id)
+
+        instagram_client = InstagramAPI(access_token = access_token)
+
+        user = instagram_client.user("self")
+
+        profiles = Profile.all()
+        profiles.filter("ig_user_id = ", user.id)
+        profile = (profiles.get() or Profile())
+
+        profile.full_name = (user.full_name or user.username)
+        profile.ig_user_id = user.id
+        profile.ig_username = user.username
+        profile.ig_access_token = access_token
+        profile.put()
+
+        cookieutil = LilCookies(self, settings.COOKIE_SECRET)
+        cookieutil.set_secure_cookie(
+                name = "ig_user_id",
+                value = user.id,
+                expires_days = 365)
+
+        self.redirect("/")
+
 
 class InstagramSubscribe(webapp.RequestHandler):
     def get(self):

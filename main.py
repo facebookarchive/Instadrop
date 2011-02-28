@@ -9,7 +9,7 @@ use_library('django', '0.96')
 from instadrop.handlers import WelcomeHandler, ConnectHandler
 from instagram.handlers import (InstagramAuth, InstagramCallback, \
                                 InstagramSubscribe, InstagramPushCallback, \
-                                InstagramDisconnect)
+                                InstagramDisconnect, InstagramLoadUser)
 from dropbox.handlers import DropboxAuth, DropboxCallback, DropboxDisconnect
 
 
@@ -24,6 +24,7 @@ application = webapp.WSGIApplication([
     ("/instagram/subscribe", InstagramSubscribe),
     ("/instagram/push_callback", InstagramPushCallback),
     ("/instagram/disconnect", InstagramDisconnect),
+    ("/instagram/load_user", InstagramLoadUser),
     ("/dropbox/auth", DropboxAuth),
     ("/dropbox/callback", DropboxCallback),
     ("/dropbox/disconnect", DropboxDisconnect)], debug=True)

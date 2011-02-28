@@ -18,7 +18,10 @@ class WelcomeHandler(webapp.RequestHandler):
         if profile and profile.fully_connected():
             self.render_template("connected.html")
         else:
-            self.render_template("not_connected.html", {"profile": profile})
+            self.render_template("not_connected.html", {
+                "profile": profile,
+                "client_id": settings.INSTAGRAM_CONFIG["client_id"]
+            })
 
 
 class ConnectHandler(webapp.RequestHandler):

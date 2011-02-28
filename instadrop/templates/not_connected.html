@@ -32,8 +32,38 @@
         {% else %}
             <h1>
                 Sound good? Let's get started. <br />
-                <a href="/instagram/auth">Connect your Instagram account</a>
+                <a href="javascript:;" onclick="do_login();">Connect your Instagram account</a>
             </h1>
+            <div id="ig-root"></div>
+            <script>
+                function do_login() {
+                    IG.login(function (response) {
+                        if (response.code) {
+                            document.location = '/instagram/callback?code=' + response.code;
+                        } else if (response.session) {
+                            document.location = '/instagram/load_user?ig_user_id=' + response.session.id;
+                        }
+                    }, {
+                        response_type: 'code',
+                        scope: ['comments','likes', 'relationships']
+                    });
+                }
+
+                window.igAsyncInit = function() {
+                    IG.init({
+                        client_id: '{{ client_id }}',
+                        logging: true,
+                        check_status: false
+                    });
+                };
+
+                (function() {
+                    var e = document.createElement('script'); e.async = true;
+                    e.src = document.location.protocol +
+                        '//github.com/Instagram/instagram-javascript-sdk/raw/master/ig-min.js';
+                    document.getElementById('ig-root').appendChild(e);
+                }());
+            </script>
         {% endif %}
     </div>
 </body>
